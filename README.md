@@ -7,7 +7,20 @@ Python wrapper to the DISORT¹ radiative transfer solver.
     transfer in multiple scattering and emitting layered media,
     Appl Opt 27 (1988) (12), pp. 2502–2509.
     
+An extra argument uphas has been added to disort.run, enabling users to pass their own phase moments to DISORT
+
 ## Installation
+
+I recommend the use of a conda environment.
+
+conda create --name pyDISORT python=2.7
+conda activate pyDISORT
+conda install pip
+pip install -r requirements.txt
+
+A fortran compiler is required to run build the wrapper. On Linux this can be installed with the command: 
+
+    sudo apt-get install gfortran
 
 Go to the directory where you have checked out the pyDISORT project and run the following command:
 
