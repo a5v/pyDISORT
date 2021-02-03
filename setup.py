@@ -161,8 +161,8 @@ os.chdir('..')
 setup(name         = "disort",
       version      = open('Version').read()[:-1],
       description  = "Python wrapper to the DISORT library",
-      author       = "Sebati\'an Gimeno Garc\'\ia",
-      author_email = "sebastian.gimenogarcia@gmail.com",
+      author       = "Aaron Vitarana",
+      author_email = "aaron.vitarana@gmail.com",
       packages     = ['disort'],
       package_dir  = {'':'lib'},
       package_data = {'disort':['*.so']+DataFiles})
