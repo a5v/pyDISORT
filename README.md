@@ -11,7 +11,9 @@ Python wrapper to the DISORT¹ radiative transfer solver.
 
 Go to the directory where you have checked out the pyDISORT project and run the following command:
 
-    sudo python setup.py install
+    python setup.py install
+
+Note: this appears to only work on Linux.
 
 ## Documentation
 
@@ -33,6 +35,11 @@ Go to the directory where you have checked out the pyDISORT project and run the 
         3 : Henyey-Greenstein with asymmetry factor GG
         4 : Haze L as specified by Garcia/Siewert
         5 : Cloud C.1 as specified by Garcia/Siewert
+	6 : Uses user input from Legendre expansion of the phase function uphas
+    uphas : array, array
+        coefficients of first 1000 terms in Legendre polynomial expansion of
+        phase function for each layer (Default: [0]*1000)
+        (Note this is only required if iphas = 6 for the given layer)
     gg : float, array
         scattering asymmetry parameter (Default: 0.85)
     umu0 : float
