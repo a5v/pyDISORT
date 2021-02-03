@@ -14,8 +14,11 @@ An extra argument uphas has been added to disort.run, enabling users to pass the
 I recommend the use of a conda environment.
 
 conda create --name pyDISORT python=2.7
+
 conda activate pyDISORT
+
 conda install pip
+
 pip install -r requirements.txt
 
 A fortran compiler is required to run build the wrapper. On Linux this can be installed with the command: 
