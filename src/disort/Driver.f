@@ -29,7 +29,7 @@ c     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
       SUBROUTINE  RUN(
      I                 MAXCLY, DTAUC, SSALB, MAXMOM, TEMPER,       
-     I                 IPHAS, GG,
+     I                 IPHAS, UPHAS, GG,
      I                 WVNMLO, WVNMHI, USRTAU, MAXULV, UTAU, NSTR,
      I                 USRANG, MAXUMU, UMU, MAXPHI, PHI, IBCND, FBEAM,
      I                 UMU0, PHI0, FISOT, LAMBER, ALBEDO, BTEMP,
@@ -99,7 +99,7 @@ c                 ** DISORT I/O specifications **
 
 CF2PY INTENT(HIDE) :: MAXCLY, MAXUMU, MAXPHI, MAXULV
 CF2PY INTENT(IN)   :: DTAUC, SSALB, TEMPER, MAXMOM
-CF2PY INTENT(IN)   :: IPHAS, GG,
+CF2PY INTENT(IN)   :: IPHAS, UPHAS, GG,
 CF2PY INTENT(IN)   :: WVNMLO, WVNMHI, USRTAU, UTAU, NSTR
 CF2PY INTENT(IN)   :: USRANG, UMU, PHI, IBCND, FBEAM
 CF2PY INTENT(IN)   :: UMU0, PHI0, FISOT, LAMBER, ALBEDO, BTEMP
@@ -126,6 +126,8 @@ c$$       PARAMETER ( MAXMOM = 299)
       INTEGER  IPHAS( MAXCLY )
       REAL     GG( MAXCLY )
 
+      REAL     UPHAS( MAXCLY, 1000 )
+
 c+---------------------------------------------------------------------+
 
       INTEGER  MXTAU, MXMU, MXPHI
@@ -149,8 +151,19 @@ c     ..
       NLYR = MAXCLY
       NMOM = NSTR
       DO LC = 1, NLYR
-         CALL  GETMOM( IPHAS( LC ), GG( LC ), NMOM, PMOM(0,LC) )
+         IF ( IPHAS( LC ).EQ. 6 ) THEN
+            NMOM=999
+            DO I=0, NMOM
+               DO J=1,MAXCLY
+                  PMOM(I,J) = UPHAS(J, I+1)
+               ENDDO
+            ENDDO
+         ELSE
+            CALL  GETMOM( IPHAS( LC ), GG( LC ), NMOM, PMOM(0,LC) )
+         END IF
       END DO 
+
+
       NTAU      = MAXULV
       NPHI      = MAXPHI
       NUMU      = MAXUMU
