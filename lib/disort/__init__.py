@@ -14,7 +14,7 @@ import _disort
 #
 ##########################################################################################################
 
-def run(dTau, w0=1., iphas=2, p = [0]*1000, gg=0.85,
+def run(dTau, w0=1., iphas=2, uphas = [0]*1000, gg=0.85,
         umu0=1., phi0=0., albedo=0.1, fbeam=1.0,
         UsrTau=True, utau=0., UsrAng=True, umu=1.,
         phi=0., Nstr=32, maxmom=299, lamber=True,
@@ -40,10 +40,10 @@ def run(dTau, w0=1., iphas=2, p = [0]*1000, gg=0.85,
         3 : Henyey-Greenstein with asymmetry factor GG
         4 : Haze L as specified by Garcia/Siewert
         5 : Cloud C.1 as specified by Garcia/Siewert
-        6 : Uses user input from Legendre expansion of the phase function p
-    p : array, array
+        6 : Uses user input from Legendre expansion of the phase function uphas
+    uphas : array, array
         coefficients of first 1000 terms in Legendre polynomial expansion of
-        phase function (Default: [0]*1000)
+        phase function for each layer (Default: [0]*1000)
         (Note this is only required if iphas = 6 for the given layer)
     gg : float, array
         scattering asymmetry parameter (Default: 0.85)
@@ -215,7 +215,7 @@ def run(dTau, w0=1., iphas=2, p = [0]*1000, gg=0.85,
             '**************************************'
 
     rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = \
-           _disort.run(dTau, w0, maxmom, temp, iphas, p, gg,
+           _disort.run(dTau, w0, maxmom, temp, iphas, uphas, gg,
                        wvnmlo, wvnmhi, UsrTau, utau, Nstr,
                        UsrAng, umu, phi, ibcnd, fbeam,
                        umu0, phi0, fisot, lamber, albedo, btemp,
