@@ -14,7 +14,7 @@ import _disort
 #
 ##########################################################################################################
 
-def run(dTau, w0=1., iphas=2, uphas = [0]*1000, gg=0.85,
+def run(dTau, w0=1., iphas=2, uphas = 1., gg=0.85,
         umu0=1., phi0=0., albedo=0.1, fbeam=1.0,
         UsrTau=True, utau=0., UsrAng=True, umu=1.,
         phi=0., Nstr=32, maxmom=299, lamber=True,
@@ -207,6 +207,13 @@ def run(dTau, w0=1., iphas=2, uphas = [0]*1000, gg=0.85,
     if not hasattr(prnt,'__iter__'):
         prnt = prnt * np.ones(5, dtype='bool')
 
+    ##initialise uphas to Rayleigh scattering if wrong dimension is given
+    if not hasattr(uphas,'__iter__'):
+        uphas = np.zeros((len(dTau), 1000))
+        for i in range(len(uphas)):
+            uphas[i][0] = int(1)
+            uphas[i][1] =  0.1
+    
     if verbose > 0:
         print ' **************************************************************'+\
             '**************************************'
